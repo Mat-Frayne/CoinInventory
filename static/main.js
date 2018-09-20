@@ -47,9 +47,9 @@ $(function () {
         $(".images").prepend(img)
     });
     getcoins();
-    $(".listclick").click();
+    //$(".listclick").click();
 });
-$(document).on("click", ".coin", function () {
+$(document).on("click touchstart", ".coin", function () {
     $(this).focus(function () {
         var $this = $(this);
         $this.select();
@@ -86,21 +86,21 @@ function callback() {
     }, 1250);
     window.location.reload(true);
 }
-$(document).on("click", "#button", function () {
+$(document).on("click touchstart", "#button", function () {
     $("#button").addClass("onclic", 250, validate());
 });
-$(document).on("click", ".ImageAdd", function () {
+$(document).on("click touchstart", ".ImageAdd", function () {
     $("#InputCamera").click()
 })
-$(document).on("click", ".images img", function (e) {
+$(document).on("click touchstart", ".images img", function (e) {
     $(this).remove();
 });
-$(document).on("click", ".addclick", function () {
+$(document).on("click touchstart", ".addclick", function () {
     $(".ListContainer").fadeOut(function () {
         $(".AddContainer").fadeIn();
     });
 })
-$(document).on("click", ".listclick", function () {
+$(document).on("click touchstart", ".listclick", function () {
     $(".AddContainer").fadeOut(function () {
         $(".ListContainer").fadeIn();
     });
@@ -139,7 +139,7 @@ function getcoins() {
     //     })
     // }, "json");
 }
-$(document).on("click", ".rem", function () {
+$(document).on("click touchstart", ".rem", function () {
     that = $(this)
     $.post("/remove", {
         id: that.attr("data-id")
