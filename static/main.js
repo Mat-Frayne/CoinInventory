@@ -49,7 +49,7 @@ $(function () {
     getcoins();
     //$(".listclick").click();
 });
-$(document).on("click touchstart", ".coin", function () {
+$(document).on("click", ".coin", function () {
     $(this).focus(function () {
         var $this = $(this);
         $this.select();
@@ -86,21 +86,21 @@ function callback() {
     }, 1250);
     window.location.reload(true);
 }
-$(document).on("click touchstart", "#button", function () {
+$(document).on("click", "#button", function () {
     $("#button").addClass("onclic", 250, validate());
 });
-$(document).on("click touchstart", ".ImageAdd", function () {
+$(document).on("click", ".ImageAdd", function () {
     $("#InputCamera").click()
 })
-$(document).on("click touchstart", ".images img", function (e) {
+$(document).on("click", ".images img", function (e) {
     $(this).remove();
 });
-$(document).on("click touchstart", ".addclick", function () {
+$(document).on("click", ".addclick", function () {
     $(".ListContainer").fadeOut(function () {
         $(".AddContainer").fadeIn();
     });
 })
-$(document).on("click touchstart", ".listclick", function () {
+$(document).on("click", ".listclick", function () {
     $(".AddContainer").fadeOut(function () {
         $(".ListContainer").fadeIn();
     });
