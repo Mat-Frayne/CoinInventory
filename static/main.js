@@ -123,18 +123,18 @@ function validate() {
 }
 $(document).on("click", ".tablesorter tr", function () {
     that = $(this)
+    view = $("#imageviewer")
+    view.find("img").attr("src", "/static/img/coins.png")
     $.ajax({
         dataType: "json",
         url: "/single/" + that.find(".rem").attr("data-id"),
         success: function (data) {
-            view = $("#imageviewer")
             images = JSON.parse(data.images)
-            if (images.length <= 1) {
-                view.find(".left").css("display", "none")
-                view.find(".right").css("display", "none")
-            }
+            dis = images.length <= 1 ? "none" : "block"
+            view.find(".left").css("display", dis)
+            view.find(".right").css("display", dis)
             view.find("img").attr("src", images[0])
-            $("#imageviewer").fadeIn();
+            $("#imageviewer").css("display", "flex").hide().fadeIn();
         }
     });
 })
