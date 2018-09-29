@@ -177,6 +177,9 @@ table.tablesorter tbody td {
     padding: 4px;
     background-color: #FFF;
     vertical-align: top;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
 }
 
 table.tablesorter tbody tr.odd td {
@@ -198,4 +201,53 @@ table.tablesorter thead tr .headerSortUp {
 
 .ListContainer {
     display: none;
+}
+
+#imageviewer {
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
+    height: 100%;
+    background: #000000b2;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    line-height: 100%;
+    display: none;
+}
+
+#imageviewer img {
+    max-width: auto;
+    height: 100%;
+}
+
+#imageviewer .exit {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    z-index: 99999;
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    cursor: pointer;
+}
+
+#imageviewer .left {
+    left: 5px;
+}
+
+#imageviewer .right {
+    right: 5px;
+}
+
+#imageviewer .left,
+#imageviewer .right {
+    position: fixed;
+    top: 50%;
+    width: 50px;
+    margin-top: -25px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
 }

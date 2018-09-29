@@ -33,6 +33,11 @@ def all():
     """."""
     return jsonify([x for x in coins.all()])
 
+@app.route("/single/<int:id>")
+def single(id):
+    """."""
+    return jsonify(coins.find_one(id=id))
+
 @app.route("/remove", methods=["POST"])
 def rem():
     """."""
