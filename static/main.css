@@ -180,6 +180,7 @@ table.tablesorter tbody td {
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 20px;
+    cursor: pointer;
 }
 
 table.tablesorter tbody tr.odd td {
