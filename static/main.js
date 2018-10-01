@@ -47,7 +47,9 @@ $(function () {
         reader.readAsDataURL(file);
         $(".images").prepend(img)
     });
-    getcoins();
+    setTimeout(function () {
+        getcoins();
+    }, 5000);
 });
 $(document).on("click", ".coin", function () {
     $(this).focus(function () {
@@ -82,7 +84,8 @@ function validate() {
 $(document).on("click", ".tablesorter tr", function () {
     that = $(this)
     view = $("#imageviewer")
-    view.find(".mainimg").attr("src", "/static/img/coins.png")
+    view.find(".mainimg").attr("src", "/static/img/loading.gif")
+    $("#imageviewer").css("display", "flex").hide().fadeIn();
     $.ajax({
         dataType: "json",
         url: "/single/" + that.find(".rem").attr("data-id"),
@@ -91,8 +94,8 @@ $(document).on("click", ".tablesorter tr", function () {
             dis = images.length <= 1 ? "none" : "block"
             view.find(".left").css("display", dis)
             view.find(".right").css("display", dis)
-            view.find(".mainimg").attr("src", images[0])
-            $("#imageviewer").css("display", "flex").hide().fadeIn();
+            if (images.length == 0) view.find(".mainimg").attr("src", "/static/img/coins.png")
+            else view.find(".mainimg").attr("src", images[0])
         }
     });
 })
@@ -158,6 +161,7 @@ function getcoins() {
                 </tr>")
                 console.log(element)
             })
+            $(".loader").fadeOut();
             $("#tablesorter").tablesorter({
                 headers: {
                     0: { sorter: false }
