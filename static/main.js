@@ -47,9 +47,7 @@ $(function () {
         reader.readAsDataURL(file);
         $(".images").prepend(img)
     });
-    setTimeout(function () {
-        getcoins();
-    }, 5000);
+    getcoins();
 });
 $(document).on("click", ".coin", function () {
     $(this).focus(function () {
