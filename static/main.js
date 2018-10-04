@@ -214,6 +214,7 @@ function getcoins() {
                 $(".tablesorter tbody").append("<tr>\
                     <td class='rem' style='width:20px' data-id='" + element.id + "' data-images='" + element.images + "'><a  style='color:red'>x</a></td>\
                     <td>" + element.type + "</td>\
+                    <td>" + element.country + "</td>\
                     <td>" + element.year + "</td>\
                     <td>$" + element.value + "</td>\
                 </tr>")
