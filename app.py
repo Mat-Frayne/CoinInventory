@@ -1,10 +1,11 @@
 """."""
 import datetime
 import sys
-
+import os
+import base64
 import dataset
 from flask import Flask, json, jsonify, render_template, request
-
+import json
 db = dataset.connect('sqlite:///database.db?check_same_thread=False')
 
 coins = db["coins"]
@@ -31,7 +32,15 @@ def index():
 @app.route("/all")
 def all():
     """."""
-    return jsonify([x for x in coins.all()])
+    
+    return jsonify([x for x in coins.all() ])
+
+
+@app.route("/img/<int:id>")
+def image(id):
+    """."""
+    data = json.loads(coins.find_one(id=id)["images"])
+    return jsonify(data)
 
 @app.route("/single/<int:id>")
 def single(id):
@@ -52,22 +61,33 @@ def rem():
 @app.route("/add", methods=["GET", "POST"])
 def add():
     """."""
-    if request.method == "POST":
-        args = request.form
-        print(args)
-        coins.insert(
-            dict(
-                type=args.get("coin"), 
-                country=args.get('country'), 
-                year=args.get('year'), 
-                value=args.get('value'), 
-                notes=args.get('notes'), 
-                added=datetime.datetime.now(),
-                images=args.get("images")
+    try:
+        if request.method == "POST":
+            args = request.get_json()
+            print(args)
+            images = args.get("images")
+            print(images)
+            coinID = coins.insert(
+                dict(
+                    type=args.get("coin"), 
+                    country=args.get('country'), 
+                    year=args.get('year'), 
+                    value=args.get('value'), 
+                    notes=args.get('notes'), 
+                    added=datetime.datetime.now(),
+                    images=int(len(images))
                 )
             )
+            if not os.path.exists(f"static/coins/{coinID}"):
+                os.makedirs(f"static/coins/{coinID}")
+                for img in images:
+                    with open(f"static/coins/{coinID}/{images.index(img)}.png", "wb") as fh:
+                        fh.write(base64.decodebytes(img.encode()))
 
-    return json.dumps({"code":1})
+        return json.dumps({"code": 1})
+    except Exception as exc:
+        raise
+        return json.dumps({"code": str(exc)})
 
 
 if __name__ == '__main__':
