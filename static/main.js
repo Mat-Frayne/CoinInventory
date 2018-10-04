@@ -173,7 +173,9 @@ $(document).on("click", ".tablesorter td", function () {
 });
 $(document).on("click touchstart", "#imageviewer .exit", function (e) {
     $(".active").attr("class", "")
-    $("#imageviewer").fadeOut();
+    $("#imageviewer").fadeOut(function () {
+        $("#imageviewer").find(".mainimg").attr("src", "/static/img/loading.gif");
+    });
 });
 
 function callback() {
