@@ -78,15 +78,14 @@ def add():
                     images=int(len(images))
                 )
             )
-            if not os.path.exists(f"static/coins/{coinID}"):
-                os.makedirs(f"static/coins/{coinID}")
+            if not os.path.exists("static/coins/{}".format(coinID)):
+                os.makedirs("static/coins/{}".format(coinID))
                 for img in images:
-                    with open(f"static/coins/{coinID}/{images.index(img)}.png", "wb") as fh:
+                    with open("static/coins/{}/{}.png".format(coinID, images.index(img)), "wb") as fh:
                         fh.write(base64.decodebytes(img.encode()))
 
         return json.dumps({"code": 1})
     except Exception as exc:
-        raise
         return json.dumps({"code": str(exc)})
 
 
