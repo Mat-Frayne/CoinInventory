@@ -341,7 +341,7 @@ table.tablesorter thead tr .headerSortUp {
     padding: 5px;
     outline: 0;
     padding: 5px;
-
+    overflow:hidden;
 
 }
 
