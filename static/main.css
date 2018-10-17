@@ -1,3 +1,9 @@
+body{
+top:0px;
+left:0px;
+width:100%;
+}
+
 #header {
     width: 100%;
     margin: 0px;
@@ -24,13 +30,11 @@
     margin: 15px;
 }
 
-label {}
-
 table {
     width: 100%;
 }
 
-table td {
+.AddContainer table td {
     width: 50%;
 }
 
@@ -92,8 +96,17 @@ button:active {
     letter-spacing: 2px;
 }
 
-button:after {
+button.submit:after {
     content: "SUBMIT";
+}
+
+button.save {
+    position: relative;
+
+}
+
+button.save:after {
+    content: "SAVE";
 }
 
 .onclic {
@@ -218,52 +231,35 @@ table.tablesorter thead tr .headerSortUp {
 }
 
 #imageviewer {
-    position: fixed;
     width: 100%;
-    z-index: 99999;
-    height: 100%;
-    background: #000000b2;
-    top: 0px;
-    left: 0px;
-    text-align: center;
-    line-height: 100%;
-    display: none;
-    align-items: center;
 }
 
-#imageviewer img {
+#imageviewer .imgtd {
+    text-align: center;
+    width: 85%;
+}
+
+#imageviewer .mainimg {
+    width: 100%;
+}
+
+#imageviewer .left img,
+#imageviewer .right img {
     display: inline-block;
     max-width: 100%;
     max-height: 100%;
     margin: 0 auto;
-}
-
-#imageviewer .exit {
-    position: fixed;
-    top: 50px;
-    right: 50px;
-    z-index: 99999;
-    color: rgb(255, 255, 255);
-    font-size: 30px;
-    cursor: pointer;
-}
-
-#imageviewer .left {
-    left: 5px;
+    width: 25px;
 }
 
 #imageviewer .right {
-    right: 5px;
     transform: rotatey(180deg);
 }
 
 #imageviewer .left,
 #imageviewer .right {
-    position: fixed;
-    top: 50%;
-    width: 50px;
-    margin-top: -25px;
-    height: 50px;
+    width: 25px;
+    padding: 10px;
     line-height: 50px;
     font-size: 30px;
     color: rgb(255, 255, 255);
@@ -313,3 +309,93 @@ table.tablesorter thead tr .headerSortUp {
 
 
 /*  */
+
+#CoinViewer {
+    position: fixed;
+    width: 100%;
+    /* min-height: 100%; */
+    height:100%;
+    overflow:auto;
+    top: 0px;
+    left: 0px;
+    background: white;
+    z-index: 99999999999999999999999;
+    /* border: solid 1px #50aadf; */
+    /* border-radius: 15px; */
+    display: none;
+}
+
+#CoinViewer table {
+    width: 95%;
+    position: relative;
+    margin: 0 auto;
+    padding: 20px;
+    table-layout: fixed;
+}
+#CoinViewer td {
+    white-space: nowrap;
+}
+#CoinViewer table .incon {
+    border: solid 1px #50aadf;
+    border-radius: 5px;
+    padding: 5px;
+    outline: 0;
+    padding: 5px;
+
+
+}
+
+#CoinViewer button{
+    margin: 5px;
+    left: 50%;
+    margin-left: -70px;
+    position:relative;
+}
+#CoinViewer  input{
+    border:none;
+    outline: 0;
+    width: 100%;
+    height: 20px;
+    line-height: 15px;
+    font-size: 15px;
+}
+#CoinViewer table textarea {
+    width: 100%;
+    border: solid 1px #50aadf;
+    border-radius: 5px;
+
+    margin: 0 auto;
+}
+
+.val {
+    margin-left: -216px;
+    z-index: 100;
+}
+
+/* input[name=ValueEdit]  {
+    padding-left: 15px !important;
+} */
+
+.value .items:before,
+.value [type=select-one]:before,
+.value .option:before{
+    content:"$"
+}
+
+.value [type=select-one]{
+    min-width:5px !important;
+}
+
+.create{
+    height:20px !important;
+    text-align:center;
+    line-height:20px;
+    font-size:18px;
+}
+
+.imagedots{
+    height:30px;
+    position:relative;
+    margin:0 auto;
+    width:100%;
+}

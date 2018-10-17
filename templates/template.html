@@ -31,37 +31,101 @@
 </head>
 
 <body>
-    <div id="imageviewer">
-        <div class="exit">X</div>
-        <div class="left"><img src="/static/img/left.png" alt=""></div>
-        <div class="right"><img src="/static/img/left.png" alt=""></div>
-        <img class="mainimg" src="/static/img/loading.gif">
+    <div id="CoinViewer">
+        <table id="info">
+
+            <tr>
+                <td>
+                    <label>Type</label><br>
+                    <div class="incon"><input name="TypeEdit" type="text" /></div>
+                </td>
+                <td>
+                    <label>Country</label><br>
+                    <div class="incon"><input name="CountryEdit" type="text" /></div>
+
+                </td>
+                <td>
+                    <button class="save"></button>
+                </td>
+
+            </tr>
+            <tr>
+                <td><label>Year</label><br>
+                    <div class="incon"><input name="YearEdit" type="text" /></div>
+                </td>
+                <td><label>Value </label><br>
+                    <div class="incon"><span>$</span><input style="width:calc(100% - 5px)"name="ValueEdit" type="text " /></div>
+                </td>
+
+                <td>
+                    <button onclick='$("#CoinViewer").fadeOut()'>cancel</button>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3"><label>Notes</label><br>
+                    <textarea name="NotesEdit" type="text "></textarea></td>
+
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table id="imageviewer">
+                        <tr>
+                            <td></td>
+                            <td><svg class="imagedots"></svg></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="left">
+                                <img src="/static/img/left.png " alt=" ">
+                            </td>
+                            <td class="imgtd">
+                                <img class="mainimg" src="/static/img/loading.gif ">
+
+                            </td>
+                            <td class="right">
+                                <img src="/static/img/left.png " alt=" ">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+            </tr>
+
+        </table>
+
+        <!-- <div id="imageviewer ">
+            <div class="exit ">X</div>
+            <div class="left "><img src="/static/img/left.png " alt=" "></div>
+            <div class="right "><img src="/static/img/left.png " alt=" "></div>
+            <img class="mainimg " src="/static/img/loading.gif ">
+        </div> -->
     </div>
     <div id="loader">
-        <div class="circle">
-            <div class="tick-wrap">
-                <div class="tick"></div>
+        <div class="circle ">
+            <div class="tick-wrap ">
+                <div class="tick "></div>
             </div>
         </div>
     </div>
     <div id="header">
         <a href="#" class="addclick">Add</a>
-        <a href="#list" class="listclick">List</a>
+        <a href="#list " class="listclick">List</a>
     </div>
     <div id="content">
-        <div class="AddContainer">
-            <form action="">
+        <div class="AddContainer ">
+            <form action=" ">
                 <label>Coin Type</label>
                 <select class="coin">
-                
-                {% for x in keys %}
-                    <option value="{{x}}">{{x}}</option>
-                {% endfor %}
 
-            </select>
+                    {% for x in keys %}
+                    <option value="{{x}}">{{x}}</option>
+                    {% endfor %}
+
+                </select>
                 <label>Country</label>
                 <select class="country">
-            </select>
+                </select>
 
             </form>
             <table>
@@ -74,6 +138,7 @@
                     <td>
                         <label>Value</label><br>
                         <select type="number" class="value"></select>
+
                     </td>
                 </tr>
             </table>
@@ -81,7 +146,7 @@
 
             <textarea class="discription"></textarea>
             <div class="container">
-                <button id="button"></button>
+                <button id="button" class="submit"></button>
             </div>
             <label>Images (click image to remove)</label>
             <div class="images">
@@ -92,16 +157,16 @@
                 </div>
             </div>
         </div>
-        <div class="ListContainer">
-            <!-- <label>Search</label><input id="CoinSearch" /> -->
-            <table id="tablesorter" class="tablesorter search-table">
+        <div class="ListContainer ">
+            <!-- <label>Search</label><input id="CoinSearch " /> -->
+            <table id="tablesorter" class="tablesorter search-table ">
 
                 <thead>
                     <tr>
                         <th></th>
                         <th>Coin</th>
                         <th>Country</th>
-                        <th style="padding-left:50px;padding-right:50px;text-align:center">Year</th>
+                        <th style="padding-left:50px;padding-right:50px;text-align:center ">Year</th>
                         <th>Value</th>
                     </tr>
                 </thead>
