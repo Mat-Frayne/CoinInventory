@@ -27,7 +27,6 @@ class Myimage {
         $(".imagedots").empty();
         var circle;
         for(x =0; x < this.max; x++){
-            console.log(x + " " + this.current)
             if(x == this.current)
                 circle = makeSVG('circle', {cx: (($(".imagedots").width()/this.max)-10)+ x*20, cy: 20, r:5, stroke: '#50aadf', 'stroke-width': 3, fill: '#50aadf'});
             else
@@ -36,8 +35,7 @@ class Myimage {
         }
     }
     setup() {
-        console.log(this.max)
-        console.log(this.id)
+
         this.dis = this.max <= 1 ? "hidden" : "visible";
         $("#imageviewer").find(".left").css("visibility", this.dis);
         $("#imageviewer").find(".right").css("visibility", this.dis);
@@ -59,7 +57,6 @@ class Myimage {
         
     }
     next() {
-        console.log(this)
         if (this.max == 0) return
         if (this.current == this.max - 1) this.current = 0;
         else this.current++;
@@ -82,17 +79,22 @@ $(function () {
     $.cookie("test", 1);
     $('.coin').selectize({
         create: true,
-        sortField: 'text'
+        sortField: 'text',
+        createOnBlur: true
     });
     $('.country').selectize({
-        create: false,
+        create: true,
+
+        createOnBlur: true
     });
     $('.year').selectize({
         create: true,
-        sortField: 'text'
+        sortField: 'text',
+        createOnBlur: true
     });
     value = $('.value').selectize({
         create: true,
+        createOnBlur: true
         // initialize: $(".value .item inout").css("padding-right", "15px")
         
     });
@@ -141,7 +143,6 @@ function validate() {
             dataType: 'json',
             data: JSON.stringify(data),
             success: function (result) {
-                console.log()
                 if (result.code == 1) {
                     $("#button").removeClass("onclic");
                     $(".onclic").removeClass("onclic");
@@ -184,10 +185,19 @@ function save() {
                     $(".active td").eq(2).text(data.country)
                     $(".active td").eq(3).text(data.year)
                     $(".active td").eq(4).text("$" + data.value)
-                } else alert("Server error " + result)
+                    $(".tablesorter tr").attr("class","")
+
+                } else {
+                    alert("Server error " + result.toString())
+                    console.log(result)
+                    $(".tablesorter tr").attr("class","")
+
+                }
             },
             error: function (result) {
                 console.log(result);
+                $(".tablesorter tr").attr("class","")
+
             }
         });
     }, 1000);
@@ -207,7 +217,6 @@ $(document).on("click", ".tablesorter td", function () {
             id: that.attr("data-id")
         }, function (msg) {
             if (JSON.parse(msg).code == 1) {
-                console.log(that.data("id"))
                 that.parent().find("td").toggle(function () {
                     that.parent().fadeOut().remove();
                 });
@@ -227,19 +236,24 @@ $(document).on("click", ".tablesorter td", function () {
         url: '/single/' + i.id,
         success: function (result) {
             try{
-            $("[name='TypeEdit']").attr('value', result.type)
-            $("[name='CountryEdit']").attr('value', result.country)
-            $("[name='YearEdit']").attr('value', result.year)
-            $("[name='ValueEdit']").attr('value', result.value)
-            $("[name='NotesEdit']").text(result.notes == null ? "" : result.notes)
-            $(document).off('click', '#imageviewer .left');
-            $(document).off('swiperight', '#imageviewer .mainimg');
-            $(document).off('click', '#imageviewer .right');
-            $(document).off('swipeleft', '#imageviewer .mainimg');
-            $(document).on("click", "#imageviewer .left", function () { i.previous() })
-            $(document).on("swiperight", "#imageviewer .mainimg", function () { i.previous() })
-            $(document).on("click", "#imageviewer .right", function () { i.next() })
-            $(document).on("swipeleft", "#imageviewer .mainimg", function () { i.next() })
+                $("#info input").val('')
+
+                
+                $("[name='TypeEdit']").val(result.type)
+                $("[name='CountryEdit']").val(result.country)
+                $("[name='YearEdit']").val(result.year)
+                $("[name='ValueEdit']").val(result.value)
+                $("[name='NotesEdit']").text(result.notes == null ? "" : result.notes)
+                
+               
+                $(document).off('click', '#imageviewer .left');
+                $(document).off('swiperight', '#imageviewer .mainimg');
+                $(document).off('click', '#imageviewer .right');
+                $(document).off('swipeleft', '#imageviewer .mainimg');
+                $(document).on("click", "#imageviewer .left", function () { i.previous() })
+                $(document).on("swiperight", "#imageviewer .mainimg", function () { i.previous() })
+                $(document).on("click", "#imageviewer .right", function () { i.next() })
+                $(document).on("swipeleft", "#imageviewer .mainimg", function () { i.next() })
         }catch(result){
             alert(result)
         }
@@ -268,6 +282,13 @@ $(document).on("click", "#button", function () {
 });
 $(document).on("click", ".save", function () {
     $(".save").addClass("onclic", 250, save());
+    
+
+});
+
+$(document).on("click", ".cancel", function(){
+    $(".tablesorter tr").attr("class","")
+    $("#CoinViewer").fadeOut()
 });
 $(document).on("click", ".ImageAdd", function () {
     $("#InputCamera").click()
@@ -285,18 +306,9 @@ $(document).on("click", ".listclick", function () {
         $(".ListContainer").fadeIn();
     });
 })
-// function checks(){
-//     if(isNaN($("[name='ValueEdit'").val()))
-//         return false
-//     else if
-
-// }
-// $(document).on("keyup", "#CoinViewer", function (){
-//     //checks
-
-   
-
-// })
+$(document).on("focus click touchstart", "input", function(e){
+    $(this).get(0).setSelectionRange(0,9999);
+})
 
 function getcoins() {
     $.ajax({

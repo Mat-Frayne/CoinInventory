@@ -22,7 +22,7 @@ LOG.disabled = True
 APP.logger.disabled = True
 
 @APP.errorhandler(Exception)
-def error(error):
+def error_(error):
     """."""
     Log(error, level=3)
     raise error
