@@ -306,7 +306,7 @@ $(document).on("click", ".listclick", function () {
         $(".ListContainer").fadeIn();
     });
 })
-$(document).on("focus click touchstart", "input", function(e){
+$(document).on("focus click touchstart", "#info input", function(e){
     $(this).get(0).setSelectionRange(0,9999);
 })
 
