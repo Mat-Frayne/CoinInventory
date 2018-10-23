@@ -2,21 +2,20 @@
 import base64
 import datetime
 import json
-import logging
 import os
 import shutil
-
+import logging
 import dataset
-from flask import Flask, json, jsonify, render_template, request
+from flask import Flask, flash, json, jsonify, render_template, request
 from PyDebug import Log, Logger
 
 DB = dataset.connect('sqlite:///database.db?check_same_thread=False')
 
-Logger.level = 3 #1 = 1
+Logger.level = 3
 
 COINS = DB["coins"]
 APP = Flask(__name__)
-
+APP.secret_key = os.environ['app_secret']
 LOG = logging.getLogger('werkzeug')
 LOG.disabled = True
 APP.logger.disabled = True
@@ -116,6 +115,9 @@ def add():
         Log("Added", args.get("coin"),
             args.get('country'), args.get('year'),
             "$" + args.get('value'))
+        flash("Sucessfully added {} {} {} worth ${}.".format(args.get("year"),
+            args.get('country'), args.get('coin'),
+            args.get('value')))
         return json.dumps({"code": 1})
 
     except Exception as exc:

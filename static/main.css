@@ -399,3 +399,10 @@ table.tablesorter thead tr .headerSortUp {
     margin:0 auto;
     width:100%;
 }
+
+
+#Flashes{
+    width:100%;
+    color:black;
+    text-align:center;
+}
